@@ -12,7 +12,11 @@ interface SortedMutableList<T> : Iterable<T> {
 
 class SortedArrayList<T>(vararg elements: T,
                          private val comp: Comparator<T>) : SortedMutableList<T> {
-    private val list = ArrayList(elements.toList())
+    private val list = mutableListOf<T>()
+
+    init {
+        elements.forEach { add(it) }
+    }
 
     private fun findIndex(element: T): Int = list.binarySearch(element, comp)
 
